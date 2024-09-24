@@ -10,14 +10,25 @@ public class UniqueWords
    public static int countUnique(ArrayList<String> list)
    {
 	  int count = 0;
+	  boolean same = false; // checks for repeated word
+	  ArrayList<String> unique = new ArrayList<String>();
+	  unique.add(list.get(0));
 	  
       for (int i = 0; i < list.size(); i++)
-      {		 for (int j = 0; j < list.size(); j++)
+      {		
+    	  for (int j = 0; j < unique.size(); j++)
 		 {
-			
+    	  if (list.get(i).equals(unique.get(j)))
+    		  same = true;
+    	  if (!same && j == unique.size() - 1)
+    	  	{
+    		  unique.add(list.get(i));
+    		  count++;
+    	  	}
 		 }
+      same = false;
       }
-	  return count;
+	  return count + 1; // counting count + initial word
    }
 
    public static void main(String[] args)
